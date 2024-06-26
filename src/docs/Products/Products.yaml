@@ -1,0 +1,134 @@
+paths:
+  /api/products:
+    get:
+      tags:
+        - products
+      summary: Obtener todos los productos
+      description: Devuelve una lista de todos los productos
+      responses:
+        "200":
+          description: Lista de productos
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Product"
+        "500":
+          description: Error interno del servidor
+
+    post:
+      tags:
+        - products
+      summary: Agregar un nuevo producto
+      description: Crea un nuevo producto
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Product"
+      responses:
+        "201":
+          description: Producto creado
+        "500":
+          description: Error interno del servidor
+
+  /api/products/{id}:
+    get:
+      tags:
+        - products
+      summary: Obtener un producto por ID
+      description: Devuelve un producto específico por ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: ID del producto
+      responses:
+        "200":
+          description: Detalles del producto
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Product"
+        "404":
+          description: Producto no encontrado
+        "500":
+          description: Error interno del servidor
+
+    put:
+      tags:
+        - products
+      summary: Actualizar un producto
+      description: Actualiza los detalles de un producto existente
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: ID del producto
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Product"
+      responses:
+        "200":
+          description: Producto actualizado
+        "404":
+          description: Producto no encontrado
+        "500":
+          description: Error interno del servidor
+
+    delete:
+      tags:
+        - products
+      summary: Eliminar un producto
+      description: Elimina un producto existente
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: ID del producto
+      responses:
+        "204":
+          description: Producto eliminado
+        "404":
+          description: Producto no encontrado
+        "500":
+          description: Error interno del servidor
+
+components:
+  schemas:
+    Product:
+      type: object
+      required:
+        - name
+        - price
+      properties:
+        id:
+          type: string
+          description: ID del producto
+        name:
+          type: string
+          description: Nombre del producto
+        description:
+          type: string
+          description: Descripción del producto
+        price:
+          type: number
+          description: Precio del producto
+        category:
+          type: string
+          description: Categoría del producto
+
+tags:
+  - name: products
+    description: Operaciones relacionadas con productos

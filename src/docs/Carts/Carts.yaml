@@ -1,0 +1,214 @@
+paths:
+  /api/carts:
+    post:
+      tags:
+        - carts
+      summary: Crear un nuevo carrito
+      description: Crea un nuevo carrito de compras
+      responses:
+        "201":
+          description: Carrito creado
+        "500":
+          description: Error interno del servidor
+
+  /api/carts/{cid}:
+    get:
+      tags:
+        - carts
+      summary: Obtener un carrito por ID
+      description: Devuelve un carrito específico por ID
+      parameters:
+        - in: path
+          name: cid
+          required: true
+          schema:
+            type: string
+          description: ID del carrito
+      responses:
+        "200":
+          description: Detalles del carrito
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Cart"
+        "404":
+          description: Carrito no encontrado
+        "500":
+          description: Error interno del servidor
+
+    put:
+      tags:
+        - carts
+      summary: Actualizar un carrito
+      description: Actualiza los detalles de un carrito existente
+      parameters:
+        - in: path
+          name: cid
+          required: true
+          schema:
+            type: string
+          description: ID del carrito
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Cart"
+      responses:
+        "200":
+          description: Carrito actualizado
+        "404":
+          description: Carrito no encontrado
+        "500":
+          description: Error interno del servidor
+
+    delete:
+      tags:
+        - carts
+      summary: Vaciar un carrito
+      description: Vacía el contenido de un carrito existente
+      parameters:
+        - in: path
+          name: cid
+          required: true
+          schema:
+            type: string
+          description: ID del carrito
+      responses:
+        "204":
+          description: Carrito vaciado
+        "404":
+          description: Carrito no encontrado
+        "500":
+          description: Error interno del servidor
+
+  /api/carts/{cid}/product/{pid}:
+    post:
+      tags:
+        - carts
+      summary: Agregar un producto al carrito
+      description: Añade un producto al carrito especificado
+      parameters:
+        - in: path
+          name: cid
+          required: true
+          schema:
+            type: string
+          description: ID del carrito
+        - in: path
+          name: pid
+          required: true
+          schema:
+            type: string
+          description: ID del producto
+      responses:
+        "200":
+          description: Producto agregado al carrito
+        "500":
+          description: Error interno del servidor
+
+    delete:
+      tags:
+        - carts
+      summary: Eliminar un producto del carrito
+      description: Elimina un producto del carrito especificado
+      parameters:
+        - in: path
+          name: cid
+          required: true
+          schema:
+            type: string
+          description: ID del carrito
+        - in: path
+          name: pid
+          required: true
+          schema:
+            type: string
+          description: ID del producto
+      responses:
+        "204":
+          description: Producto eliminado del carrito
+        "500":
+          description: Error interno del servidor
+
+    put:
+      tags:
+        - carts
+      summary: Actualizar la cantidad de un producto en el carrito
+      description: Actualiza la cantidad de un producto en el carrito especificado
+      parameters:
+        - in: path
+          name: cid
+          required: true
+          schema:
+            type: string
+          description: ID del carrito
+        - in: path
+          name: pid
+          required: true
+          schema:
+            type: string
+          description: ID del producto
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                quantity:
+                  type: integer
+                  description: Nueva cantidad del producto
+      responses:
+        "200":
+          description: Cantidad de producto actualizada
+        "500":
+          description: Error interno del servidor
+
+  /api/carts/{cid}/purchase:
+    post:
+      tags:
+        - carts
+      summary: Finalizar la compra
+      description: Completa la compra de los productos en el carrito especificado
+      parameters:
+        - in: path
+          name: cid
+          required: true
+          schema:
+            type: string
+          description: ID del carrito
+      responses:
+        "200":
+          description: Compra completada
+        "500":
+          description: Error interno del servidor
+
+components:
+  schemas:
+    Cart:
+      type: object
+      required:
+        - userId
+      properties:
+        id:
+          type: string
+          description: ID del carrito
+        userId:
+          type: string
+          description: ID del usuario
+        products:
+          type: array
+          items:
+            type: object
+            properties:
+              productId:
+                type: string
+                description: ID del producto
+              quantity:
+                type: integer
+                description: Cantidad del producto
+
+tags:
+  - name: carts
+    description: Operaciones relacionadas con carritos de compras
