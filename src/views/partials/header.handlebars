@@ -1,0 +1,28 @@
+<header>
+  <div>
+    <nav id="navbarNav">
+      <ul>
+        <h2>YUNGAS HERBAL</h2>
+        <li>
+          <a href="/">Home</a>
+        </li>
+        {{#if isAuthenticated}}
+          <li>
+            <a href="/api/users/profile">Mi Perfil</a>
+          </li>
+        {{else}}
+          {{#unless isInLoginPage}}
+            <li>
+              <a href="/login">Inicio de Sesión</a>
+            </li>
+          {{/unless}}
+          {{#unless isInRegisterPage}}
+            <li>
+              <a href="/register">Registrarse</a>
+            </li>
+          {{/unless}}
+        {{/if}}
+      </ul>
+    </nav>
+  </div>
+</header>

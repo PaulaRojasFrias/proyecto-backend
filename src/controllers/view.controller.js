@@ -78,11 +78,11 @@ class ViewsController {
   }
 
   async renderLogin(req, res) {
-    res.render("login");
+    res.render("login", { isInLoginPage: true });
   }
 
   async renderRegister(req, res) {
-    res.render("register");
+    res.render("register", { isInRegisterPage: true });
   }
 
   async renderRealTimeProducts(req, res) {
