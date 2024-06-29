@@ -1,0 +1,25 @@
+<link rel="stylesheet" href="/css/style.css" />
+
+<div class="profile-container">
+  <h1>Mi Perfil</h1>
+
+  <div class="profile-card">
+    <p>Bienvenid@, {{user.firstName}} !</p>
+    <p>Rol: {{user.role}}</p>
+
+    <form action="/api/users/logout" method="POST">
+      <button class="btnMios" type="submit">Logout</button>
+    </form>
+
+    <div class="btn-container">
+      {{#if this.isAdmin}}
+        <a class="btnMios" href="/realtimeproducts">Modificar Productos</a>
+      {{else}}
+        {{#if this.isPremium}}
+          <a class="btnMios" href="/realtimeproducts">Panel Premium</a>
+        {{/if}}
+        <a class="btnMios" href="/products">Tienda</a>
+      {{/if}}
+    </div>
+  </div>
+</div>

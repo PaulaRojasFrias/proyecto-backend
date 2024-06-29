@@ -10,6 +10,9 @@ function authMiddleware(req, res, next) {
     } else {
       req.user = user;
     }
+
+    req.isAuthenticated = () => !!req.user;
+
     next();
   })(req, res, next);
 }

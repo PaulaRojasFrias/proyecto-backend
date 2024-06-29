@@ -6,6 +6,7 @@ const userController = new UserController();
 const UserModel = require("../models/user.model");
 const { createHash } = require("../utils/hashBcrypt");
 const upload = require("../midleware/multer.js");
+const authMiddleware = require("../midleware/authMiddleware");
 
 router.post("/register", userController.register);
 router.post("/login", userController.login);

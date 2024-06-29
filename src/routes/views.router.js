@@ -5,7 +5,7 @@ const viewsController = new ViewsController();
 const checkUserRole = require("../midleware/checkrole.js");
 const passport = require("passport");
 const generateProducts = require("../utils/utils.js");
-
+const authMiddleware = require("../midleware/authmiddleware.js");
 router.get(
   "/products",
   checkUserRole(["user"]),
@@ -22,7 +22,11 @@ router.get(
   viewsController.renderRealTimeProducts
 );
 router.get("/chat", checkUserRole(["user"]), viewsController.renderChat);
-router.get("/", viewsController.renderHome);
+
+router.get("/", authMiddleware, (req, res) => {
+  console.log("Usuario autenticado:", req.user);
+  res.render("home", { user: req.user, isAuthenticated: req.isAuthenticated });
+});
 
 router.get("/mockingProducts", (req, res) => {
   const products = generateProducts();
