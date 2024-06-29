@@ -1,25 +1,23 @@
-<header>
-  <div>
+<header class="site-header">
+  <div class="nav-list">
     <nav id="navbarNav">
-      <ul>
-        <h2>YUNGAS HERBAL</h2>
-        <li>
-          <a href="/">Home</a>
-        </li>
+      <div class="brand">
+        <h4>YUNGAS HERBAL</h4>
+      </div>
+      <ul class="nav-links">
+        <li><a href="/">Home</a></li>
         {{#if isAuthenticated}}
-          <li>
-            <a href="/api/users/profile">Mi Perfil</a>
-          </li>
+          <li><a href="/api/users/profile">Mi Perfil</a></li>
+          <li><a href="/products">Colección</a></li>
+          <li><a href="/carts/{{cartId}}" class="ms-5"><i
+                class="bi bi-cart cart-icon"
+              ></i></a></li>
         {{else}}
           {{#unless isInLoginPage}}
-            <li>
-              <a href="/login">Inicio de Sesión</a>
-            </li>
+            <li><a href="/login">Iniciar Sesión</a></li>
           {{/unless}}
           {{#unless isInRegisterPage}}
-            <li>
-              <a href="/register">Registrarse</a>
-            </li>
+            <li><a href="/register">Registrarse</a></li>
           {{/unless}}
         {{/if}}
       </ul>

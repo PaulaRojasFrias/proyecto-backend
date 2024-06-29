@@ -1,0 +1,191 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  font-family: "Montserrat", sans-serif;
+  color: white;
+}
+
+/*-----------------Header-----------------*/
+
+.site-header {
+  height: 12vh;
+  background-color: #00584b; /* Color de fondo */
+  padding: 20px;
+  color: #fff;
+  font-size: 1rem;
+}
+
+.nav-list {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 15 20px;
+}
+
+#navbarNav {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.brand {
+  flex: 1;
+}
+
+.nav-links {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links li {
+  margin: 0 15px;
+}
+
+.nav-links a {
+  text-decoration: none;
+}
+
+.ms-5 {
+  margin-left: 5px;
+}
+
+/*-------------------Home--------------------*/
+
+.background-container {
+  height: 88vh;
+  background-image: url("/fondo.jpg");
+  background-color: #00584b;
+  background-size: cover;
+  background-position: center;
+  padding: 20px;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.overlay {
+  position: relative;
+  max-width: 850px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  text-align: center;
+}
+
+.overlay h2,
+.overlay p,
+.overlay .btn {
+  margin: 10px 0;
+}
+
+.overlay .btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #00584b;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+  text-align: center;
+}
+.overlay .btn:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+/*----------------------Register, login--------------------*/
+.form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.form-container h2 {
+  text-align: center;
+  color: #00584b;
+}
+
+.formulario {
+  background: white;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.formulario .formulario-campo {
+  margin-bottom: 20px;
+}
+
+.formulario .formulario-campo label {
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #00584b;
+}
+
+.formulario .formulario-campo input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.formulario .formulario-campo input:focus {
+  outline: none;
+  border-color: #00584b;
+  box-shadow: 0 0 5px rgba(0, 88, 75, 0.3);
+}
+
+.formulario .btn {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #00584b;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.formulario .btn:hover {
+  background-color: #004236;
+}
+
+.formulario p {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.formulario p a {
+  color: #00584b;
+  text-decoration: none;
+}
+
+.formulario p a:hover {
+  text-decoration: underline;
+}

@@ -1,19 +1,27 @@
-<h1>Registrarse</h1>
-<form action="/api/users/register" method="post">
-  <label for="first_name">Nombre:</label>
-  <input type="text" id="first_name" name="first_name" required />
+<div class="form-container">
+  <h2>Registrarse</h2>
+  <form action="/api/users/register" method="post" class="formulario">
+    <div class="formulario-campo">
+      <label for="first_name">Nombre:</label>
+      <input type="text" id="first_name" name="first_name" required />
+    </div>
+    <div class="formulario-campo">
+      <label for="last_name">Apellido:</label>
+      <input type="text" id="last_name" name="last_name" required />
+    </div>
+    <div class="formulario-campo">
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required />
+    </div>
+    <div class="formulario-campo">
+      <label for="password">Contraseña:</label>
+      <input type="password" id="password" name="password" required />
+    </div>
+    <div class="formulario-campo">
+      <label for="age">Edad:</label>
+      <input type="number" id="age" name="age" required />
+    </div>
 
-  <label for="last_name">Apellido:</label>
-  <input type="text" id="last_name" name="last_name" required />
-
-  <label for="email">Email:</label>
-  <input type="email" id="email" name="email" required />
-
-  <label for="password">Contraseña:</label>
-  <input type="password" id="password" name="password" required />
-
-  <label for="age">Edad:</label>
-  <input type="number" id="age" name="age" required />
-
-  <button type="submit">Register</button>
-</form>
+    <button type="submit" class="btn">Register</button>
+  </form>
+</div>
