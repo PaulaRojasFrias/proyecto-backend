@@ -35,6 +35,8 @@ class ViewsController {
         currentPage: parseInt(page),
         totalPages,
         cartId,
+        user: req.user,
+        isAuthenticated: req.isAuthenticated,
       });
     } catch (error) {
       console.error("Error al obtener productos", error);
@@ -71,7 +73,13 @@ class ViewsController {
         };
       });
 
-      res.render("carts", { products: productsInCart, totalPurchase, cartId });
+      res.render("carts", {
+        products: productsInCart,
+        totalPurchase,
+        cartId,
+        user: req.user,
+        isAuthenticated: req.isAuthenticated,
+      });
     } catch (error) {
       console.error("Error al obtener el carrito", error);
       res.status(500).json({ error: "Error interno del servidor" });

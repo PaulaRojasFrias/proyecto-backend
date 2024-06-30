@@ -1,0 +1,58 @@
+<link rel="stylesheet" href="/css/style.css" />
+
+<div class="product-header">
+    <h1 class="product-title">Productos</h1>
+    <a href="/carts/{{cartId}}" class="cart-link">
+        <i class="bi bi-cart cart-icon"></i>
+    </a>
+</div>
+
+<div class="product-container">
+    {{#each productos}}
+    <div class="product-card">
+        <img src="{{img}}" alt="{{title}}" class="product-img">
+        <div class="product-info">
+            <h2 class="product-name">{{title}}</h2>
+            <p class="product-description">{{description}}</p>
+            <p class="product-price">Price: ${{price}}</p>
+
+            <form action="/api/carts/{{../cartId}}/product/{{id}}" method="POST" class="product-form">
+                <div class="quantity-selector">
+                    <button type="button" class="quantity-btn" onclick="decreaseQuantity(this)">-</button>
+                    <input type="number" class="quantity-input" value="1" name="quantity" readonly>
+                    <button type="button" class="quantity-btn" onclick="increaseQuantity(this)">+</button>
+                </div>
+                <button class="add-to-cart-btn" type="submit">Agregar al Carrito</button>
+            </form>
+        </div>
+    </div>
+    {{/each}}
+</div>
+
+<div class="pagination-container">
+    {{#if hasPrevPage}}
+    <a href="/products?page={{prevPage}}" class="pagination-link"> Anterior </a>
+    {{/if}}
+    {{#if hasNextPage}}
+    <a href="/products?page={{nextPage}}" class="pagination-link"> Siguiente </a>
+    {{/if}}
+    <p class="pagination-info">Pagina {{currentPage}} de {{totalPages}} </p>
+</div>
+
+<script>
+    function decreaseQuantity(button) {
+        let input = button.parentNode.querySelector('input[type=number]');
+        let currentValue = parseInt(input.value);
+        if (!isNaN(currentValue) && currentValue > 1) {
+            input.value = currentValue - 1;
+        }
+    }
+
+    function increaseQuantity(button) {
+        let input = button.parentNode.querySelector('input[type=number]');
+        let currentValue = parseInt(input.value);
+        if (!isNaN(currentValue)) {
+            input.value = currentValue + 1;
+        }
+    }
+</script>

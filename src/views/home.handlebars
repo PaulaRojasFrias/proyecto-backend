@@ -6,6 +6,10 @@
       velas aromáticas, tés artesanales, hierbas medicinales y aceites
       esenciales, seleccionados con dedicación para mejorar tu vida de forma
       natural.</p>
-    <a href="/shop" class="btn">Explora nuestra colección</a>
+    {{#if isAuthenticated}}
+      <a href="/products" class="btn">Explora nuestra colección</a>
+    {{else}}
+      <a href="/register" class="btn">Regístrate y explora nuestra colección</a>
+    {{/if}}
   </div>
 </div>

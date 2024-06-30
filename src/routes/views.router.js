@@ -13,7 +13,7 @@ router.get(
   viewsController.renderProducts
 );
 
-router.get("/carts/:cid", viewsController.renderCart);
+router.get("/carts/:cid", authMiddleware, viewsController.renderCart);
 router.get("/login", viewsController.renderLogin);
 router.get("/register", viewsController.renderRegister);
 router.get(
