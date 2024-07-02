@@ -4,7 +4,7 @@ function deleteProduct(cartId, productId) {
   })
     .then((response) => {
       if (!response.ok) {
-        throw new Error("Error al eliminar el producto del carrito");
+        throw new Error("Error deleting product from cart");
       }
       location.reload();
     })
@@ -19,7 +19,7 @@ function clearCart(cartId) {
   })
     .then((response) => {
       if (!response.ok) {
-        throw new Error("Error al vaciar el carrito");
+        throw new Error("Error clearing cart");
       }
       location.reload();
     })

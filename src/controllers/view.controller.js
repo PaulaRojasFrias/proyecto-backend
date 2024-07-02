@@ -2,6 +2,7 @@ const ProductModel = require("../models/product.model.js");
 const CartRepository = require("../repositories/cart.repository.js");
 const cartRepository = new CartRepository();
 const passport = require("passport");
+const authMiddleware = require("../midleware/authmiddleware.js");
 
 class ViewsController {
   async renderProducts(req, res) {
