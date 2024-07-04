@@ -372,15 +372,16 @@ a {
 
 /*---------------------Cart-----------------------*/
 .cart-container {
-  font-family: Arial, sans-serif;
+  font-family: "Montserrat", sans-serif;
   background-color: #f5f5f5;
   color: #333;
   padding: 20px;
+  height: 90vh;
 }
 
 .cart-container h1 {
   text-align: center;
-  color: #4caf50;
+  color: #00584b;
 }
 
 .cart-container .container {
@@ -446,4 +447,212 @@ a {
 .cart-container script {
   text-align: center;
   margin-top: 20px;
+}
+
+.empty-cart-message {
+  margin-top: 50px;
+  font-size: 18px;
+  color: #333;
+}
+
+.empty-cart-message a {
+  color: #00584b;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.empty-cart-message a:hover {
+  text-decoration: underline;
+}
+
+/*-------------------realtime-products-------------------------*/
+.realtime-products-container {
+  text-align: center;
+  padding: 50px 10px;
+}
+
+.title {
+  font-size: 2.5rem;
+  color: #2c3e50;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  font-size: 1.5rem;
+  color: #16a085;
+  margin-bottom: 30px;
+}
+
+.user-info {
+  display: inline-block;
+  text-align: left;
+  background-color: #ecf0f1;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.user-info h3 {
+  margin: 10px 0;
+  font-size: 1rem;
+  color: #34495e;
+}
+
+.user-role {
+  font-weight: bold;
+}
+
+/*--------------------Checkout-------------------*/
+.checkout {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 90vh;
+  background-color: #f5f5f5;
+  margin: 0;
+}
+.form-checkout {
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+  background-color: #ffffff; /* Color de fondo blanco */
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(128, 128, 128, 0.2); /* Sombra gris */
+  text-align: center; /* Centro de texto dentro del contenedor */
+}
+.checkout-title {
+  font-size: 24px;
+  color: #00584b;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.thank-you-message {
+  font-size: 18px;
+  color: #00584b;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.order-info {
+  font-size: 16px;
+  color: #00584b;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.highlight {
+  font-weight: bold;
+  color: #00584b;
+}
+
+.btn-container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.btn-checkout {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #00584b;
+  color: #ffffff;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-checkout:hover {
+  background-color: #34495e;
+}
+
+/*Confirmacion*/
+.confirmacion h3 {
+  color: #34495e;
+  text-align: center;
+  margin-top: 20px;
+}
+
+/*-----------------Panel premium------------------*/
+
+.container-premium {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+}
+
+.form-container-premium {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #f5f5f5;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.formulario-premium {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.formulario-premium .formulario-campo-premium {
+  margin-bottom: 20px;
+}
+
+.formulario-premium .formulario-campo-premium label {
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #00584b;
+}
+
+.formulario-premium .formulario-campo-premium input,
+.formulario-premium .formulario-campo-premium textarea,
+.formulario-premium .formulario-campo-premium select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.formulario-premium .formulario-campo-premium input:focus,
+.formulario-premium .formulario-campo-premium textarea:focus,
+.formulario-premium .formulario-campo-premium select:focus {
+  outline: none;
+  border-color: #00584b;
+  box-shadow: 0 0 5px rgba(0, 88, 75, 0.3);
+}
+
+.formulario-premium .btn-premium {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #00584b;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.formulario-premium .btn-premium:hover {
+  background-color: #004236;
+}
+
+.product-list-premium {
+  list-style-type: none;
+  padding: 0;
+}
+
+.product-list-premium li {
+  background-color: #fff;
+  padding: 10px;
 }

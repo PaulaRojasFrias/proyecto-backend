@@ -97,7 +97,18 @@ class ViewsController {
 
   async renderRealTimeProducts(req, res) {
     try {
-      res.render("realtimeproducts");
+      const user = req.user;
+
+      if (!user) {
+        return res.status(401).send("Usuario no autenticado");
+      }
+
+      res.render("realtimeproducts", {
+        role: user.role,
+        email: user.email,
+        user: user,
+        isAuthenticated: req.isAuthenticated(),
+      });
     } catch (error) {
       console.error("Error en la vista real time", error);
       res.status(500).json({ error: "Error interno del servidor" });

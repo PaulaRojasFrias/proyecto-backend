@@ -16,9 +16,10 @@ router.get(
 router.get("/carts/:cid", authMiddleware, viewsController.renderCart);
 router.get("/login", viewsController.renderLogin);
 router.get("/register", viewsController.renderRegister);
+
 router.get(
   "/realtimeproducts",
-  checkUserRole(["admin"]),
+  checkUserRole(["admin", "premium"]),
   viewsController.renderRealTimeProducts
 );
 router.get("/chat", checkUserRole(["user"]), viewsController.renderChat);

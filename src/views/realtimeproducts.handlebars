@@ -1,0 +1,53 @@
+<link rel="stylesheet" href="/css/style.css" />
+
+<div class="realtime-products-container">
+  <h1 class="title">Real Time Products</h1>
+  <h2 class="subtitle">Productos actualizados en tiempo real</h2>
+  <div class="user-info">
+    <h3 id="role" class="user-role">Rol: {{role}}</h3>
+    <h3 id="email" class="user-email">Email: {{email}}</h3>
+  </div>
+</div>
+
+<div class="form-container">
+  <h2>Formulario para agregar productos</h2>
+  <form class="formulario">
+    <div class="formulario-campo">
+      <input type="text" id="title" placeholder="Titulo" />
+    </div>
+    <div class="formulario-campo">
+      <input type="text" id="description" placeholder="Descripcion" />
+    </div>
+    <div class="formulario-campo">
+      <input type="number" id="price" placeholder="Precio" />
+    </div>
+
+    <div class="formulario-campo">
+      <input type="text" id="img" placeholder="Link imagen" />
+    </div>
+
+    <div class="formulario-campo">
+      <input type="text" id="code" placeholder="Código" />
+    </div>
+
+    <div class="formulario-campo">
+      <input type="number" id="stock" placeholder="Stock" />
+    </div>
+
+    <div class="formulario-campo">
+      <input type="text" id="category" placeholder="Categoria" />
+    </div>
+
+    <div class="formulario-campo">
+      <select id="status">
+        <option value="true"> Activo </option>
+        <option value="false"> Inactivo </option>
+      </select>
+    </div>
+
+    <button type="button" class="btn" id="btnEnviar">Enviar</button>
+  </form>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdn.socket.io/4.7.4/socket.io.min.js"></script>
+<script src="js/realtime.js"></script>
