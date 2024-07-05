@@ -53,6 +53,7 @@
   </div>
 
   <h2 class="mt-5">Tus Productos Premium</h2>
+
   <ul id="userProductsList" class="product-list-premium">
     {{#each userProducts}}
       <li>
@@ -60,48 +61,12 @@
         <p>{{this.description}}</p>
         <p>Precio: ${{this.price}}</p>
         <form class="deleteForm" data-product-id="{{this._id}}">
-          <button
-            type="button"
-            class="deleteButton btn btn-danger"
-          >Eliminar</button>
+          <button type="button" class="deleteButton">Eliminar</button>
         </form>
       </li>
     {{/each}}
   </ul>
 </div>
-
-<script
-  src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.5/socket.io.js"
-></script>
-<script>
-  const socket = io(); // Manejar la solicitud POST del formulario
-  document.getElementById('productForm').addEventListener('submit', async
-  (event) => { event.preventDefault(); const formData = new
-  FormData(event.target); const productData = {}; formData.forEach((value, key)
-  => { productData[key] = value; }); try { const response = await
-  fetch('/api/products', { method: 'POST', headers: { 'Content-Type':
-  'application/json' }, body: JSON.stringify(productData) }); if (response.ok) {
-  console.log('Producto agregado correctamente'); event.target.reset(); //
-  Limpiar el formulario } else { console.error('Error al agregar el producto:',
-  response.statusText); } } catch (error) { console.error('Error en la
-  solicitud:', error.message); } }); // Manejar actualizaciones en tiempo real
-  de la lista de productos socket.on('products', (products) => { const
-  productList = document.getElementById('userProductsList');
-  productList.innerHTML = ''; // Limpiar la lista antes de agregar los nuevos
-  productos products.forEach(product => { const newItem =
-  document.createElement('li'); newItem.innerHTML = ` <h3>${product.title}</h3>
-  <p>${product.description}</p> <p>Precio: $${product.price}</p> <form
-  class="deleteForm" data-product-id="${product._id}"> <button type="button"
-  class="deleteButton btn btn-danger">Eliminar</button> </form> `;
-  productList.appendChild(newItem); }); }); // Manejar la eliminación de
-  productos
-  document.getElementById('userProductsList').addEventListener('click', async
-  (event) => { if (event.target.classList.contains('deleteButton')) { const
-  productId = event.target.parentElement.dataset.productId; try { const response
-  = await fetch(`/api/products/${productId}`, { method: 'DELETE' }); if
-  (response.ok) { console.log('Producto eliminado correctamente del servidor');
-  event.target.parentElement.parentElement.remove(); // Eliminar del DOM } else
-  { console.error('Error al eliminar el producto:', response.statusText); } }
-  catch (error) { console.error('Error en la solicitud:', error.message); } }
-  });
-</script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdn.socket.io/4.7.4/socket.io.min.js"></script>
+<script src="js/panel-premium.js"></script>

@@ -95,6 +95,7 @@ class UserController {
 
   async profile(req, res) {
     const isPremium = req.user.role === "premium";
+    const isUser = req.user.role === "user";
     const userDto = new UserDTO(
       req.user.first_name,
       req.user.last_name,
@@ -107,6 +108,7 @@ class UserController {
       user: userDto,
       isAdmin,
       isPremium,
+      isUser,
     });
   }
 

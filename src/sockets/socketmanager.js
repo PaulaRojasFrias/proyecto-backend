@@ -5,7 +5,7 @@ const MessageModel = require("../models/message.model.js");
 
 class SocketManager {
   constructor(httpServer) {
-    this.io = socket(httpServer);
+    this.io = require("socket.io")(httpServer);
     this.initSocketEvents();
   }
 
@@ -17,12 +17,20 @@ class SocketManager {
 
       socket.on("deleteProduct", async (id) => {
         await productRepository.deleteProduct(id);
-        this.emitUpdatedProducts(socket);
+        this.emitUpdatedProducts();
       });
 
       socket.on("addProduct", async (product) => {
         await productRepository.addProduct(product);
-        this.emitUpdatedProducts(socket);
+        socket.emit("productAdded", {
+          success: true,
+          message: "Producto agregado correctamente",
+        });
+        this.emitUpdatedProducts();
+      });
+
+      socket.on("requestProducts", async () => {
+        socket.emit("products", await productRepository.getProducts());
       });
 
       socket.on("message", async (data) => {
@@ -33,8 +41,9 @@ class SocketManager {
     });
   }
 
-  async emitUpdatedProducts(socket) {
-    socket.emit("products", await productRepository.getProducts());
+  async emitUpdatedProducts() {
+    const products = await productRepository.getProducts();
+    this.io.emit("products", products); // Emitir a todos los clientes conectados
   }
 }
 

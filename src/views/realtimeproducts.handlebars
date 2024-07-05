@@ -9,43 +9,75 @@
   </div>
 </div>
 
+<div id="contenedorProductos"></div>
+
 <div class="form-container">
   <h2>Formulario para agregar productos</h2>
-  <form class="formulario">
+  <form class="formulario" id="productForm">
     <div class="formulario-campo">
-      <input type="text" id="title" placeholder="Titulo" />
+      <input
+        type="text"
+        id="title"
+        name="title"
+        placeholder="Titulo"
+        required
+      />
     </div>
     <div class="formulario-campo">
-      <input type="text" id="description" placeholder="Descripcion" />
+      <input
+        type="text"
+        id="description"
+        name="description"
+        placeholder="Descripcion"
+        required
+      />
     </div>
     <div class="formulario-campo">
-      <input type="number" id="price" placeholder="Precio" />
+      <input
+        type="number"
+        id="price"
+        name="price"
+        placeholder="Precio"
+        required
+      />
     </div>
-
     <div class="formulario-campo">
-      <input type="text" id="img" placeholder="Link imagen" />
+      <input
+        type="text"
+        id="img"
+        name="img"
+        placeholder="Link imagen"
+        required
+      />
     </div>
-
     <div class="formulario-campo">
-      <input type="text" id="code" placeholder="Código" />
+      <input type="text" id="code" name="code" placeholder="Código" required />
     </div>
-
     <div class="formulario-campo">
-      <input type="number" id="stock" placeholder="Stock" />
+      <input
+        type="number"
+        id="stock"
+        name="stock"
+        placeholder="Stock"
+        required
+      />
     </div>
-
     <div class="formulario-campo">
-      <input type="text" id="category" placeholder="Categoria" />
+      <input
+        type="text"
+        id="category"
+        name="category"
+        placeholder="Categoria"
+        required
+      />
     </div>
-
     <div class="formulario-campo">
-      <select id="status">
+      <select id="status" name="status" required>
         <option value="true"> Activo </option>
         <option value="false"> Inactivo </option>
       </select>
     </div>
-
-    <button type="button" class="btn" id="btnEnviar">Enviar</button>
+    <button type="submit" class="btn">Enviar</button>
   </form>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

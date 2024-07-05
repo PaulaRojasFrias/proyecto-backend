@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const ProductController = require("../controllers/productsController.js");
 const productController = new ProductController();
+const passport = require("passport");
 
 router.get("/", async (req, res) => {
   try {
@@ -22,14 +23,18 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
-  try {
-    await productController.addProduct(req, res);
-  } catch (error) {
-    console.error("Error al agregar producto", error);
-    res.status(500).json({ error: "Error interno del servidor" });
+router.post(
+  "/",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
+    try {
+      await productController.addProduct(req, res);
+    } catch (error) {
+      console.error("Error al agregar producto", error);
+      res.status(500).json({ error: "Error interno del servidor" });
+    }
   }
-});
+);
 
 // Update
 router.put("/:id", async (req, res) => {

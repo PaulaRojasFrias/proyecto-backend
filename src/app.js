@@ -22,6 +22,7 @@ const addLogger = require("./utils/logger.js");
 const app = express();
 
 // Configuración Handlebars
+
 app.engine("handlebars", exphbs.engine());
 app.set("view engine", "handlebars");
 app.set("views", "./src/views");

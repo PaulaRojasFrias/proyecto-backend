@@ -120,7 +120,16 @@ class ViewsController {
   }
 
   async renderHome(req, res) {
-    res.render("home");
+    const isPremium = req.user.role === "premium";
+    const isUser = req.user.role === "user";
+    const isAdmin = req.user.role === "admin";
+    res.render("home", {
+      user: req.user,
+      isAuthenticated: req.isAuthenticated(),
+      isAdmin,
+      isPremium,
+      isUser,
+    });
   }
 
   async renderResetPassword(req, res) {
@@ -136,7 +145,23 @@ class ViewsController {
   }
 
   async renderPremium(req, res) {
-    res.render("panel-premium");
+    try {
+      const user = req.user;
+
+      if (!user) {
+        return res.status(401).send("Usuario no autenticado");
+      }
+
+      res.render("panel-premium", {
+        role: user.role,
+        email: user.email,
+        user: user,
+        isAuthenticated: req.isAuthenticated(),
+      });
+    } catch (error) {
+      console.error("Error en la vista real time", error);
+      res.status(500).json({ error: "Error interno del servidor" });
+    }
   }
 }
 
