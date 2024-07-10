@@ -1,6 +1,7 @@
 const ProductModel = require("../models/product.model.js");
 const CartRepository = require("../repositories/cart.repository.js");
 const cartRepository = new CartRepository();
+const UserModel = require("../models/user.model.js");
 const passport = require("passport");
 const authMiddleware = require("../midleware/authmiddleware.js");
 
@@ -161,6 +162,30 @@ class ViewsController {
     } catch (error) {
       console.error("Error en la vista real time", error);
       res.status(500).json({ error: "Error interno del servidor" });
+    }
+  }
+
+  async renderUsersView(req, res) {
+    //   try {
+    //     const users = await UserModel.find({}, "first_name last_name email role");
+    //     res.render("users", { users });
+    //   } catch (error) {
+    //     console.error("Error al obtener usuarios:", error);
+    //     res.status(500).send("Error al obtener usuarios");
+    //   }
+    // }
+    try {
+      const users = await UserModel.find({}, "first_name last_name email role");
+      const usersWithRoles = users.map((user) => ({
+        ...user.toObject(),
+        isAdmin: user.role === "admin",
+        isUser: user.role === "user",
+        isPremium: user.role === "premium",
+      }));
+      res.render("users", { users: usersWithRoles });
+    } catch (error) {
+      console.error("Error al obtener usuarios:", error);
+      res.status(500).send("Error al obtener usuarios");
     }
   }
 }

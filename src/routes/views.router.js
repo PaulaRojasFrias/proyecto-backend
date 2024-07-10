@@ -38,5 +38,6 @@ router.get("/reset-password", viewsController.renderResetPassword);
 router.get("/password", viewsController.renderCambioPassword);
 router.get("/confirmacion-envio", viewsController.renderConfirmacion);
 router.get("/panel-premium", viewsController.renderPremium);
+router.get("/usersView", viewsController.renderUsersView);
 
 module.exports = router;

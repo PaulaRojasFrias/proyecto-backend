@@ -315,19 +315,19 @@ class UserController {
   }
 
   async deleteUser(req, res) {
-    const { userId } = req.params;
+    const id = req.params.id;
 
     try {
-      const deletedUser = await userRepository.deleteUser(userId);
+      const deletedUser = await userRepository.deleteUser(id);
       if (!deletedUser) {
         return res
           .status(404)
-          .json({ error: `Usuario con ID ${userId} no encontrado.` });
+          .json({ error: `Usuario con ID ${id} no encontrado.` });
       }
-      res.status(200).json({ message: `Usuario con ID ${userId} eliminado.` });
+      res.status(200).json({ message: `Usuario con ID ${id} eliminado.` });
     } catch (error) {
-      console.error(`Error al eliminar usuario ${userId}:`, error);
-      res.status(500).json({ error: `Error al eliminar usuario ${userId}.` });
+      console.error(`Error al eliminar usuario ${id}:`, error);
+      res.status(500).json({ error: `Error al eliminar usuario ${id}.` });
     }
   }
 

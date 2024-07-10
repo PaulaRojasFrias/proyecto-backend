@@ -1,41 +1,44 @@
-<h1>Lista de Usuarios</h1>
+<div class="users">
+  <h1>Lista de Usuarios</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Nombre</th>
-      <th>Email</th>
-      <th>Rol</th>
-      <th>Acciones</th>
-    </tr>
-  </thead>
-  <tbody>
-    {{#each users}}
+  <table>
+    <thead>
       <tr>
-        <td>{{this.first_name}} {{this.last_name}}</td>
-        <td>{{this.email}}</td>
-        <td>
-          {{#if (eq this.role 'admin')}}
-            Administrador
-          {{else}}
-            <form action="/api/users/{{this._id}}/role" method="POST">
-              <select name="newRole">
-                <option value="user" {{#if (eq this.role 'user')}}selected{{/if}}>Usuario</option>
-                <option value="premium" {{#if (eq this.role 'premium')}}selected{{/if}}>Premium</option>
-                <option value="admin" {{#if (eq this.role 'admin')}}selected{{/if}}>Administrador</option>
-              </select>
-              <button type="submit">Actualizar Rol</button>
-            </form>
-          {{/if}}
-        </td>
-        <td>
-          {{#unless (eq this.role 'admin')}}
-            <form action="/admin/users/{{this._id}}" method="POST">
-              <button type="submit">Eliminar</button>
-            </form>
-          {{/unless}}
-        </td>
+        <th>Nombre</th>
+        <th>Email</th>
+        <th>Rol</th>
+        <th>Acciones</th>
       </tr>
-    {{/each}}
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      {{#each users}}
+        <tr>
+          <td>{{this.first_name}} {{this.last_name}}</td>
+          <td>{{this.email}}</td>
+          <td>
+            {{#if this.isAdmin}}
+              <span class="user-role">Administrador</span>
+            {{else}}
+              <form action="/api/users/{{this._id}}/role" method="POST">
+                <select name="newRole" class="user-role-selector">
+                  <option value="user" {{#if this.isUser}}selected{{/if}}>Usuario</option>
+                  <option value="premium" {{#if this.isPremium}}selected{{/if}}>Premium</option>
+                  <option value="admin" {{#if this.isAdmin}}selected{{/if}}>Administrador</option>
+                </select>
+                <button type="submit" class="btn-update-role">Actualizar Rol</button>
+              </form>
+            {{/if}}
+          </td>
+          <td>
+            {{#unless this.isAdmin}}
+           <form action="/api/users/{{this._id}}" method="POST">
+           <input type="hidden" name="_method" value="DELETE">
+           <button type="submit">Eliminar Usuario</button>
+           </form>
+            {{/unless}}
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>

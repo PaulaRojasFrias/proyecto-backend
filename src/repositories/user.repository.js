@@ -99,16 +99,17 @@ class UserRepository {
 
   async updateUserRolebyId(userId, newRole) {
     try {
-      const user = await UserModel.findById(userId);
+      const updatedUser = await UserModel.findByIdAndUpdate(
+        userId,
+        { role: newRole },
+        { new: true }
+      );
 
-      if (!user) {
+      if (!updatedUser) {
         throw new Error("Usuario no encontrado");
       }
 
-      user.role = newRole;
-      await user.save();
-
-      return user;
+      return updatedUser;
     } catch (error) {
       throw error;
     }

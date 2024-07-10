@@ -48,8 +48,15 @@ router.get("/", userController.getUsers);
 
 router.delete("/", userController.deleteInactiveUsers);
 
-router.delete("/:userId", userController.deleteUser);
+router.delete("/:userId", async (req, res) => {
+  try {
+    await userController.deleteUser(req, res);
+  } catch (error) {
+    console.error("Error al eliminar usuario", error);
+    res.status(500).json({ error: "Error interno del servidor" });
+  }
+});
 
-router.put("/:userId/role", userController.updateUserRole);
+router.post("/:userId/role", userController.updateUserRole);
 
 module.exports = router;
