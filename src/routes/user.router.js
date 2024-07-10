@@ -7,6 +7,7 @@ const UserModel = require("../models/user.model");
 const { createHash } = require("../utils/hashBcrypt");
 const upload = require("../midleware/multer.js");
 const authMiddleware = require("../midleware/authMiddleware");
+const checkUserRole = require("../midleware/checkrole.js");
 
 router.post("/register", userController.register);
 router.post("/login", userController.login);
@@ -42,5 +43,13 @@ router.post(
     }
   }
 );
+
+router.get("/", userController.getUsers);
+
+router.delete("/", userController.deleteInactiveUsers);
+
+router.delete("/:userId", userController.deleteUser);
+
+router.put("/:userId/role", userController.updateUserRole);
 
 module.exports = router;

@@ -289,6 +289,65 @@ class UserController {
       res.status(500).send("Error interno del servidor");
     }
   }
+
+  async getUsers(req, res) {
+    try {
+      const users = await userRepository.getUsers();
+      res.json(users);
+    } catch (error) {
+      console.error("Error al obtener usuarios:", error);
+      res.status(500).json({ error: "Error al obtener usuarios" });
+    }
+  }
+
+  async deleteInactiveUsers(req, res) {
+    try {
+      const twoDaysAgo = new Date();
+      twoDaysAgo.setDate(twoDaysAgo.getDate() - 2);
+      const result = await userRepository.deleteInactiveUsers(twoDaysAgo);
+      res
+        .status(200)
+        .json({ message: `${result.deletedCount} usuarios eliminados.` });
+    } catch (error) {
+      console.error("Error al eliminar usuarios inactivos:", error);
+      res.status(500).json({ error: "Error al eliminar usuarios inactivos." });
+    }
+  }
+
+  async deleteUser(req, res) {
+    const { userId } = req.params;
+
+    try {
+      const deletedUser = await userRepository.deleteUser(userId);
+      if (!deletedUser) {
+        return res
+          .status(404)
+          .json({ error: `Usuario con ID ${userId} no encontrado.` });
+      }
+      res.status(200).json({ message: `Usuario con ID ${userId} eliminado.` });
+    } catch (error) {
+      console.error(`Error al eliminar usuario ${userId}:`, error);
+      res.status(500).json({ error: `Error al eliminar usuario ${userId}.` });
+    }
+  }
+
+  async updateUserRole(req, res) {
+    const { userId } = req.params;
+    const { newRole } = req.body;
+
+    try {
+      const updatedUser = await userRepository.updateUserRolebyId(
+        userId,
+        newRole
+      );
+      res.status(200).json(updatedUser);
+    } catch (error) {
+      console.error(`Error al actualizar rol del usuario ${userId}:`, error);
+      res
+        .status(500)
+        .json({ error: `Error al actualizar rol del usuario ${userId}.` });
+    }
+  }
 }
 
 module.exports = UserController;

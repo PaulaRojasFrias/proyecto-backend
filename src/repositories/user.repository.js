@@ -66,6 +66,53 @@ class UserRepository {
       throw error;
     }
   }
+
+  async getUsers() {
+    try {
+      const users = await UserModel.find({}, "first_name last_name email role");
+      return users;
+    } catch (error) {
+      console.error("Error al obtener usuarios:", error);
+      throw error;
+    }
+  }
+
+  async deleteInactiveUsers(lastConnectionDate) {
+    try {
+      const result = await UserModel.deleteMany({
+        last_connection: { $lt: lastConnectionDate },
+      });
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async deleteUser(userId) {
+    try {
+      const deletedUser = await UserModel.findByIdAndDelete(userId);
+      return deletedUser;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async updateUserRolebyId(userId, newRole) {
+    try {
+      const user = await UserModel.findById(userId);
+
+      if (!user) {
+        throw new Error("Usuario no encontrado");
+      }
+
+      user.role = newRole;
+      await user.save();
+
+      return user;
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 module.exports = UserRepository;
