@@ -8,6 +8,7 @@ const productRepository = new ProductRepository();
 const { generateUniqueCode, calculateTotal } = require("../utils/cartUtils.js");
 const EmailManager = require("../services/email.js");
 const emailManager = new EmailManager();
+const authMiddleware = require("../midleware/authmiddleware.js");
 
 class CartController {
   async createCart(req, res) {
@@ -140,47 +141,6 @@ class CartController {
     }
   }
 
-  // async completePurchase(req, res) {
-  //   const cartId = req.params.cid;
-  //   try {
-  //     const cart = await cartManager.getCartByid(cartId);
-  //     const products = cart.products;
-  //     const outOfStockProducts = [];
-
-  //     for (const item of products) {
-  //       const productId = item.product;
-  //       const product = await productRepository.getProductById(productId);
-  //       if (product.stock >= item.quantity) {
-  //         product.stock -= item.quantity;
-  //         await product.save();
-  //       } else {
-  //         outOfStockProducts.push(productId);
-  //       }
-  //     }
-
-  //     const userWithCart = await UserModel.findOne({ cart: cartId });
-
-  //     const ticket = new TicketModel({
-  //       code: generateUniqueCode(),
-  //       purchase_datetime: new Date(),
-  //       amount: calculateTotal(cart.products),
-  //       purchaser: userWithCart._id,
-  //     });
-  //     await ticket.save();
-
-  //     cart.products = cart.products.filter((item) =>
-  //       outOfStockProducts.some((productId) => productId.equals(item.product))
-  //     );
-
-  //     await cart.save();
-
-  //     res.status(200).json({ outOfStockProducts });
-  //   } catch (error) {
-  //     console.error("Error al procesar la compra:", error);
-  //     res.status(500).json({ error: "Error interno del servidor" });
-  //   }
-  // }
-
   async completePurchase(req, res) {
     const cartId = req.params.cid;
     try {
@@ -220,10 +180,13 @@ class CartController {
       );
 
       // Renderizar vista de confirmación de compra
+      authMiddleware;
       res.render("checkout", {
         cliente: userWithCart.first_name,
         email: userWithCart.email,
         numTicket: ticket._id,
+        user: req.user,
+        isAuthenticated: req.isAuthenticated,
       });
     } catch (error) {
       console.error("Error al procesar la compra:", error);

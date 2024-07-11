@@ -1,6 +1,8 @@
 const ProductModel = require("../models/product.model.js");
 const ProductManager = require("../repositories/product.repository.js");
 const manager = new ProductManager();
+const EmailManager = require("../services/email.js");
+const emailManager = new EmailManager();
 
 class ProductController {
   async addProduct(req, res) {
@@ -69,7 +71,21 @@ class ProductController {
   async deleteProduct(req, res) {
     const id = req.params.id;
     try {
+      const product = await manager.getProductById(id);
+      if (!product) {
+        return res.status(404).json({
+          error: "Producto no encontrado",
+        });
+      }
       await manager.deleteProduct(id);
+      const owner = await UserModel.findById(product.owner);
+      if (owner.role === "premium") {
+        await emailManager.enviarCorreoProductoEliminado(
+          owner.email,
+          owner.first_name,
+          product.name
+        );
+      }
       res.json({
         message: "Producto eliminado exitosamente",
       });

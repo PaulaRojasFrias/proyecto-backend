@@ -25,8 +25,17 @@ router.get(
 router.get("/chat", checkUserRole(["user"]), viewsController.renderChat);
 
 router.get("/", authMiddleware, (req, res) => {
-  console.log("Usuario autenticado:", req.user);
-  res.render("home", { user: req.user, isAuthenticated: req.isAuthenticated });
+  const isAdmin = req.user && req.user.role === "admin";
+  const isUser = req.user && req.user.role === "user";
+  const isPremium = req.user && req.user.role === "premium";
+
+  res.render("home", {
+    user: req.user,
+    isAuthenticated: req.isAuthenticated(),
+    isAdmin,
+    isUser,
+    isPremium,
+  });
 });
 
 router.get("/mockingProducts", (req, res) => {

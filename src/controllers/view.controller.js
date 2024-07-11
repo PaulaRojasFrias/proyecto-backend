@@ -120,17 +120,38 @@ class ViewsController {
     res.render("chat");
   }
 
+  // async renderHome(req, res) {
+  //   const isPremium = req.user.role === "premium";
+  //   const isAdmin = req.user.role === "admin";
+  //   const isUser = req.user.role !== "admin" && req.user.role !== "premium";
+  //   res.render("home", {
+  //     user: req.user,
+  //     isAuthenticated: req.isAuthenticated(),
+  //     isAdmin,
+  //     isPremium,
+  //     isUser,
+  //   });
+  // }
   async renderHome(req, res) {
-    const isPremium = req.user.role === "premium";
-    const isUser = req.user.role === "user";
-    const isAdmin = req.user.role === "admin";
-    res.render("home", {
-      user: req.user,
-      isAuthenticated: req.isAuthenticated(),
-      isAdmin,
-      isPremium,
-      isUser,
-    });
+    try {
+      const user = req.user ? req.user.toObject() : null;
+      const isAuthenticated = req.isAuthenticated();
+
+      const isAdmin = user.role === "admin";
+      const isUser = user.role === "user";
+      const isPremium = user.role === "premium";
+
+      res.render("home", {
+        user,
+        isAuthenticated,
+        isAdmin,
+        isUser,
+        isPremium,
+      });
+    } catch (error) {
+      console.error("Error al renderizar la vista principal:", error);
+      res.status(500).json({ error: "Error interno del servidor." });
+    }
   }
 
   async renderResetPassword(req, res) {
@@ -166,14 +187,6 @@ class ViewsController {
   }
 
   async renderUsersView(req, res) {
-    //   try {
-    //     const users = await UserModel.find({}, "first_name last_name email role");
-    //     res.render("users", { users });
-    //   } catch (error) {
-    //     console.error("Error al obtener usuarios:", error);
-    //     res.status(500).send("Error al obtener usuarios");
-    //   }
-    // }
     try {
       const users = await UserModel.find({}, "first_name last_name email role");
       const usersWithRoles = users.map((user) => ({

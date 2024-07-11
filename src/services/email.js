@@ -56,6 +56,46 @@ class EmailManager {
       throw new Error("Error al enviar correo electrónico");
     }
   }
+
+  async enviarCorreoProductoEliminado(email, first_name, product_name) {
+    try {
+      const mailOptions = {
+        from: `Yungas Herbal <${gmail_aplicacion}>`,
+        to: email,
+        subject: "Producto Eliminado",
+        html: `
+          <h1>Producto Eliminado</h1>
+          <p>Hola ${first_name},</p>
+          <p>Te informamos que tu producto "${product_name}" ha sido eliminado de nuestro sistema.</p>
+          <p>Si tienes alguna pregunta o inquietud, no dudes en contactarnos.</p>
+        `,
+      };
+
+      await this.transporter.sendMail(mailOptions);
+    } catch (error) {
+      console.error("Error al enviar el correo electrónico:", error);
+    }
+  }
+
+  async enviarCorreoCuentaEliminada(email, first_name) {
+    try {
+      const mailOptions = {
+        from: `Yungas Herbal <${gmail_aplicacion}>`,
+        to: email,
+        subject: "Cuenta Eliminada por Inactividad",
+        html: `
+          <h1>Cuenta Eliminada</h1>
+          <p>Hola ${first_name},</p>
+          <p>Te informamos que tu cuenta ha sido eliminada debido a inactividad prolongada.</p>
+          <p>Si tienes alguna pregunta o inquietud, no dudes en contactarnos.</p>
+        `,
+      };
+
+      await this.transporter.sendMail(mailOptions);
+    } catch (error) {
+      console.error("Error al enviar el correo electrónico:", error);
+    }
+  }
 }
 
 module.exports = EmailManager;

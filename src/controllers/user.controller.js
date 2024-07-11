@@ -304,7 +304,16 @@ class UserController {
     try {
       const twoDaysAgo = new Date();
       twoDaysAgo.setDate(twoDaysAgo.getDate() - 2);
+      const inactiveUsers = await UserModel.find({
+        lastActive: { $lt: twoDaysAgo },
+      });
       const result = await userRepository.deleteInactiveUsers(twoDaysAgo);
+      for (const user of inactiveUsers) {
+        await emailManager.enviarCorreoCuentaEliminada(
+          user.email,
+          user.first_name
+        );
+      }
       res
         .status(200)
         .json({ message: `${result.deletedCount} usuarios eliminados.` });

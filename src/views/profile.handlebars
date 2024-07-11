@@ -13,13 +13,14 @@
 
     <div class="btn-container">
       {{#if this.isAdmin}}
-        <a class="btnMios" href="/realtimeproducts">Modificar Productos</a>
+        <a class="btnMios" href="/realtimeproducts">Agregar Productos</a>
         <a class="btnMios" href="/usersView">Usuarios</a>
       {{else}}
         {{#if this.isPremium}}
           <a class="btnMios" href="/panel-premium">Panel Premium</a>
+        {{else}}
+          <a class="btnMios" href="/products">Tienda</a>
         {{/if}}
-        <a class="btnMios" href="/products">Tienda</a>
       {{/if}}
     </div>
   </div>
