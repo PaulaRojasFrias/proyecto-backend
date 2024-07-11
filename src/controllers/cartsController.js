@@ -168,18 +168,14 @@ class CartController {
         purchaser: userWithCart._id,
       });
       await ticket.save();
-
-      // Vaciar el contenido del carrito después de la compra
       await cartManager.deleteCartContent(cartId);
 
-      // Enviar correo de confirmación de compra
       await emailManager.enviarCorreoCompra(
         userWithCart.email,
         userWithCart.first_name,
         ticket._id
       );
 
-      // Renderizar vista de confirmación de compra
       authMiddleware;
       res.render("checkout", {
         cliente: userWithCart.first_name,

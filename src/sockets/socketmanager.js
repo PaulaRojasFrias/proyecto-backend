@@ -43,7 +43,7 @@ class SocketManager {
 
   async emitUpdatedProducts() {
     const products = await productRepository.getProducts();
-    this.io.emit("products", products); // Emitir a todos los clientes conectados
+    this.io.emit("products", products);
   }
 }
 

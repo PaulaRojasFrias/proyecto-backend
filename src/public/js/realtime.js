@@ -2,12 +2,10 @@ const socket = io();
 const role = document.getElementById("role").textContent;
 const email = document.getElementById("email").textContent;
 
-// Manejar la recepción de productos actualizados
 socket.on("products", (data) => {
   renderProductos(data);
 });
 
-// Manejar el evento de producto agregado
 socket.on("productAdded", (data) => {
   if (data.success) {
     Swal.fire({
@@ -19,7 +17,6 @@ socket.on("productAdded", (data) => {
   }
 });
 
-// Función para renderizar nuestros productos
 const renderProductos = (productos) => {
   const contenedorProductos = document.getElementById("contenedorProductos");
   contenedorProductos.innerHTML = "";
@@ -50,18 +47,15 @@ const renderProductos = (productos) => {
   });
 };
 
-// Función para eliminar un producto
 const eliminarProducto = (id) => {
   socket.emit("deleteProduct", id);
 };
 
-// Agregar productos del formulario
 document.getElementById("productForm").addEventListener("submit", (event) => {
   event.preventDefault();
   agregarProducto();
 });
 
-// Función para agregar un producto
 const agregarProducto = () => {
   const role = document.getElementById("role").textContent;
   const email = document.getElementById("email").textContent;
@@ -80,7 +74,7 @@ const agregarProducto = () => {
     owner,
   };
 
-  console.log("Producto a agregar:", producto); // Agrega este log para verificar
+  console.log("Producto a agregar:", producto);
 
   socket.emit("addProduct", producto);
 };

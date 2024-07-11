@@ -120,18 +120,6 @@ class ViewsController {
     res.render("chat");
   }
 
-  // async renderHome(req, res) {
-  //   const isPremium = req.user.role === "premium";
-  //   const isAdmin = req.user.role === "admin";
-  //   const isUser = req.user.role !== "admin" && req.user.role !== "premium";
-  //   res.render("home", {
-  //     user: req.user,
-  //     isAuthenticated: req.isAuthenticated(),
-  //     isAdmin,
-  //     isPremium,
-  //     isUser,
-  //   });
-  // }
   async renderHome(req, res) {
     try {
       const user = req.user ? req.user.toObject() : null;

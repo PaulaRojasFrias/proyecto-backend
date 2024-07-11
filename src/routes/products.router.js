@@ -13,7 +13,6 @@ router.get("/", async (req, res) => {
   }
 });
 
-// Con id
 router.get("/:id", async (req, res) => {
   try {
     await productController.getProductById(req, res);
@@ -36,7 +35,6 @@ router.post(
   }
 );
 
-// Update
 router.put("/:id", async (req, res) => {
   try {
     await productController.updateProduct(req, res);

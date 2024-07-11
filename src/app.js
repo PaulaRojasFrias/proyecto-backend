@@ -10,7 +10,6 @@ const jwt = require("jsonwebtoken");
 const swaggerJSDoc = require("swagger-jsdoc");
 const swaggerUiExpress = require("swagger-ui-express");
 const passport = require("passport");
-const helpers = require("./utils/helpers.js");
 
 // Configuración y utilidades
 const configObject = require("./config/config.js");
@@ -26,7 +25,6 @@ const app = express();
 const hbs = exphbs.create({
   defaultLayout: "main",
   extname: ".handlebars",
-  helpers, // Integrar los helpers
   runtimeOptions: {
     allowProtoPropertiesByDefault: true,
     allowProtoMethodsByDefault: true,
