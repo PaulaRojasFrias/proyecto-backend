@@ -324,7 +324,7 @@ class UserController {
   }
 
   async deleteUser(req, res) {
-    const id = req.params.id;
+    const { id } = req.params;
 
     try {
       const deletedUser = await userRepository.deleteUser(id);

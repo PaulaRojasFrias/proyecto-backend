@@ -48,7 +48,7 @@ router.get("/", userController.getUsers);
 
 router.delete("/", userController.deleteInactiveUsers);
 
-router.delete("/:userId", async (req, res) => {
+router.delete("/:id", async (req, res) => {
   try {
     await userController.deleteUser(req, res);
   } catch (error) {

@@ -52,18 +52,21 @@
     </form>
   </div>
 
+  <input type="hidden" id="userId" value="{{this._id}}" />
+  <h3 class="productos-title-premium">Tus Productos Premium</h3>
   <ul id="userProductsList" class="product-list-premium">
     {{#each userProducts}}
-      <li>
+      <li class="product-item-premium">
         <h3>{{this.title}}</h3>
         <p>{{this.description}}</p>
         <p>Precio: ${{this.price}}</p>
-        <form class="deleteForm" data-product-id="{{this._id}}">
-          <button type="button" class="deleteButton">Eliminar</button>
+        <form class="deleteForm-premium" data-product-id="{{this._id}}">
+          <button type="button" class="deleteButton-premium">Eliminar</button>
         </form>
       </li>
     {{/each}}
   </ul>
+
 </div>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdn.socket.io/4.7.4/socket.io.min.js"></script>

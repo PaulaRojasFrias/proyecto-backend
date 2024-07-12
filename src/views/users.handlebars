@@ -12,7 +12,7 @@
     </thead>
     <tbody>
       {{#each users}}
-        <tr>
+        <tr data-user-id="{{this._id}}">
           <td>{{this.first_name}} {{this.last_name}}</td>
           <td>{{this.email}}</td>
           <td>
@@ -31,10 +31,7 @@
           </td>
           <td>
             {{#unless this.isAdmin}}
-           <form action="/api/users/{{this._id}}" method="POST">
-           <input type="hidden" name="_method" value="DELETE">
-           <button type="submit">Eliminar Usuario</button>
-           </form>
+              <button class="btn-delete-user">Eliminar Usuario</button>
             {{/unless}}
           </td>
         </tr>
@@ -42,3 +39,68 @@
     </tbody>
   </table>
 </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.all.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const tableBody = document.querySelector('.users tbody');
+
+      tableBody.addEventListener('click', async (event) => {
+        if (event.target.classList.contains('btn-delete-user')) {
+          const row = event.target.closest('tr');
+          const userId = row.getAttribute('data-user-id');
+          
+          if (userId) {
+            const result = await Swal.fire({
+              title: '¿Estás seguro?',
+              text: "No podrás revertir esto",
+              icon: 'warning',
+              showCancelButton: true,
+              confirmButtonText: 'Sí, eliminar',
+              cancelButtonText: 'Cancelar'
+            });
+
+            if (result.isConfirmed) {
+              try {
+                const response = await fetch(`/api/users/${userId}`, {
+                  method: 'DELETE',
+                  headers: {
+                    'Content-Type': 'application/json',
+                  },
+                });
+                
+                if (response.ok) {
+                  row.remove();
+                  Swal.fire(
+                    'Eliminado',
+                    'El usuario ha sido eliminado.',
+                    'success'
+                  );
+                } else {
+                  const errorData = await response.json();
+                  Swal.fire(
+                    'Error',
+                    `Error al eliminar el usuario: ${errorData.error}`,
+                    'error'
+                  );
+                }
+              } catch (error) {
+                console.error('Error:', error);
+                Swal.fire(
+                  'Error',
+                  'Error al eliminar el usuario',
+                  'error'
+                );
+              }
+            }
+          } else {
+            Swal.fire(
+              'Error',
+              'ID de usuario no encontrado.',
+              'error'
+            );
+          }
+        }
+      });
+    });
+  </script>

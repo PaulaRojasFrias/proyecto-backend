@@ -154,6 +154,26 @@ class ViewsController {
     res.render("confirmacion-envio");
   }
 
+  // async renderPremium(req, res) {
+  //   try {
+  //     const user = req.user;
+
+  //     if (!user) {
+  //       return res.status(401).send("Usuario no autenticado");
+  //     }
+
+  //     res.render("panel-premium", {
+  //       role: user.role,
+  //       email: user.email,
+  //       user: user,
+  //       isAuthenticated: req.isAuthenticated(),
+  //     });
+  //   } catch (error) {
+  //     console.error("Error en la vista real time", error);
+  //     res.status(500).json({ error: "Error interno del servidor" });
+  //   }
+  // }
+
   async renderPremium(req, res) {
     try {
       const user = req.user;
@@ -162,10 +182,14 @@ class ViewsController {
         return res.status(401).send("Usuario no autenticado");
       }
 
+      // Obtener productos del usuario
+      const userProducts = await ProductModel.find({ owner: user._id });
+
       res.render("panel-premium", {
         role: user.role,
         email: user.email,
         user: user,
+        userProducts: userProducts, // Pasar los productos del usuario a la vista
         isAuthenticated: req.isAuthenticated(),
       });
     } catch (error) {
@@ -173,7 +197,6 @@ class ViewsController {
       res.status(500).json({ error: "Error interno del servidor" });
     }
   }
-
   async renderUsersView(req, res) {
     try {
       const users = await UserModel.find({}, "first_name last_name email role");

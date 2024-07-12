@@ -657,6 +657,48 @@ a {
   padding: 10px;
 }
 
+.productos-title-premium {
+  font-size: 1.5rem;
+  color: #004236;
+  margin-bottom: 10px;
+}
+
+.product-list-premium {
+  list-style-type: none;
+  padding: 0;
+}
+
+.product-item-premium {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.product-item-premium h3 {
+  font-size: 1.2rem;
+  margin-bottom: 5px;
+  color: #004236;
+}
+
+.product-item-premium p {
+  font-size: 1rem;
+  margin-bottom: 5px;
+}
+
+.deleteButton-premium {
+  background-color: #00584b;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.deleteButton-premium:hover {
+  background-color: #d9534f;
+}
+
 /*------------------Users View--------------------*/
 
 .users {

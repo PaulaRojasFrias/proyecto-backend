@@ -30,7 +30,7 @@ const hbs = exphbs.create({
     allowProtoMethodsByDefault: true,
   },
 });
-app.engine("handlebars", exphbs.engine());
+app.engine("handlebars", hbs.engine);
 app.set("view engine", "handlebars");
 app.set("views", "./src/views");
 
