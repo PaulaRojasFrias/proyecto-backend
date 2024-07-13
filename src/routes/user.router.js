@@ -5,9 +5,9 @@ const UserController = require("../controllers/user.controller.js");
 const userController = new UserController();
 const UserModel = require("../models/user.model");
 const { createHash } = require("../utils/hashBcrypt");
-const upload = require("../midleware/multer.js");
-const authMiddleware = require("../midleware/authMiddleware");
-const checkUserRole = require("../midleware/checkrole.js");
+const upload = require("../middleware/multer.js");
+const authMiddleware = require("../middleware/authMiddleware");
+const checkUserRole = require("../middleware/checkrole.js");
 
 router.post("/register", userController.register);
 router.post("/login", userController.login);

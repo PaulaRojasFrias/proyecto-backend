@@ -8,7 +8,7 @@ const productRepository = new ProductRepository();
 const { generateUniqueCode, calculateTotal } = require("../utils/cartUtils.js");
 const EmailManager = require("../services/email.js");
 const emailManager = new EmailManager();
-const authMiddleware = require("../midleware/authmiddleware.js");
+const authMiddleware = require("../middleware/authmiddleware.js");
 
 class CartController {
   async createCart(req, res) {

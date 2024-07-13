@@ -15,7 +15,7 @@ const passport = require("passport");
 const configObject = require("./config/config.js");
 const { puerto, mongo_url, secret_key } = configObject;
 require("./database.js"); // Inicialización de la base de datos
-const errorManager = require("./midleware/error.js");
+const errorManager = require("./middleware/error.js");
 const addLogger = require("./utils/logger.js");
 
 // Inicializar la aplicación
@@ -64,7 +64,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Middleware de autenticación
-const authMiddleware = require("./midleware/authmiddleware.js");
+const authMiddleware = require("./middleware/authmiddleware.js");
 app.use(authMiddleware);
 
 // Documentación con Swagger

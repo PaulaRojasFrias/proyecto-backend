@@ -3,7 +3,6 @@ const CartRepository = require("../repositories/cart.repository.js");
 const cartRepository = new CartRepository();
 const UserModel = require("../models/user.model.js");
 const passport = require("passport");
-const authMiddleware = require("../midleware/authmiddleware.js");
 
 class ViewsController {
   async renderProducts(req, res) {
@@ -154,26 +153,6 @@ class ViewsController {
     res.render("confirmacion-envio");
   }
 
-  // async renderPremium(req, res) {
-  //   try {
-  //     const user = req.user;
-
-  //     if (!user) {
-  //       return res.status(401).send("Usuario no autenticado");
-  //     }
-
-  //     res.render("panel-premium", {
-  //       role: user.role,
-  //       email: user.email,
-  //       user: user,
-  //       isAuthenticated: req.isAuthenticated(),
-  //     });
-  //   } catch (error) {
-  //     console.error("Error en la vista real time", error);
-  //     res.status(500).json({ error: "Error interno del servidor" });
-  //   }
-  // }
-
   async renderPremium(req, res) {
     try {
       const user = req.user;
@@ -182,7 +161,6 @@ class ViewsController {
         return res.status(401).send("Usuario no autenticado");
       }
 
-      // Obtener productos del usuario
       const userProducts = await ProductModel.find({ owner: user._id });
 
       res.render("panel-premium", {

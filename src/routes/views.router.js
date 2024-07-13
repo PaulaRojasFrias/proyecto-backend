@@ -2,10 +2,10 @@ const express = require("express");
 const router = express.Router();
 const ViewsController = require("../controllers/view.controller.js");
 const viewsController = new ViewsController();
-const checkUserRole = require("../midleware/checkrole.js");
+const checkUserRole = require("../middleware/checkrole.js");
 const passport = require("passport");
 const generateProducts = require("../utils/utils.js");
-const authMiddleware = require("../midleware/authmiddleware.js");
+const authMiddleware = require("../middleware/authmiddleware.js");
 router.get(
   "/products",
   checkUserRole(["user"]),

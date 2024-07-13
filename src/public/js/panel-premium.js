@@ -2,9 +2,8 @@ const socket = io();
 
 document.addEventListener("DOMContentLoaded", () => {
   const productForm = document.getElementById("productForm");
-  const userId = document.getElementById("userId").value; // Obtener el ID del usuario autenticado
+  const userId = document.getElementById("userId").value;
 
-  // Escuchar el evento de submit del formulario para agregar un nuevo producto
   productForm.addEventListener("submit", async (event) => {
     event.preventDefault();
 
@@ -15,11 +14,9 @@ document.addEventListener("DOMContentLoaded", () => {
       productData[key] = value;
     });
 
-    // Agregar el owner al producto
-    productData.owner = userId; // Asignar el ID del usuario autenticado como owner
+    productData.owner = userId;
 
     try {
-      // Emitir el evento para agregar el producto
       const response = await fetch("/api/products", {
         method: "POST",
         headers: {
@@ -34,7 +31,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const data = await response.json();
 
-      // Manejar la respuesta del servidor
       if (data.success) {
         Swal.fire({
           title: "Listo",
@@ -43,7 +39,6 @@ document.addEventListener("DOMContentLoaded", () => {
           confirmButtonText: "OK",
         });
 
-        // Solicitar la actualización de la lista de productos
         socket.emit("requestProducts");
       } else {
         throw new Error(data.error || "Error al agregar el producto");
@@ -58,7 +53,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Escuchar el evento 'productos' para actualizar la lista de productos en el cliente
   socket.on("productos", (productos) => {
     const productList = document.getElementById("userProductsList");
     productList.innerHTML = "";
@@ -77,7 +71,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Escuchar el evento 'productAdded' para manejar la respuesta después de agregar un producto
   socket.on("productAdded", (data) => {
     if (data.success) {
       Swal.fire({
@@ -87,12 +80,10 @@ document.addEventListener("DOMContentLoaded", () => {
         confirmButtonText: "OK",
       });
 
-      // Solicitar la actualización de la lista de productos
       socket.emit("requestProducts");
     }
   });
 
-  // Escuchar clics en botones de eliminación dentro de la lista de productos
   document
     .getElementById("userProductsList")
     .addEventListener("click", (event) => {
@@ -104,6 +95,5 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-  // Solicitar la lista de productos cuando se carga la página
   socket.emit("requestProducts");
 });
